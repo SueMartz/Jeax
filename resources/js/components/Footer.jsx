@@ -26,7 +26,7 @@ const Footer = () => {
             <h5 className="fw-bold">Jeax</h5>
 
             <p className="mb-2">
-              Abierto todos los días de 10 a. m. a 7 p. m.
+              Abierto de Lunes a Sábado  de 10 a. m. a 7 p. m.
             </p>
 
             <p className="mb-2">

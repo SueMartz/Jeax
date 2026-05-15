@@ -8,504 +8,510 @@ use App\Models\Pagina;
 
 class SeoController extends Controller
 {
-    private function renderApp(array $seo = [], $content = '', $useReact = true)
-{
-    $seo = array_merge([
-        'title'       => 'JEAX Store - Reparación de Rines Profesional',
-        'description' => 'Especialistas en enderezado, pintura, diamantado, pulido y barrenado de rines en México.',
-        'url'         => url()->current(),
-    ], $seo);
+    /*
+    |--------------------------------------------------------------------------
+    | RENDER PRINCIPAL
+    |--------------------------------------------------------------------------
+    */
 
-    return view('welcome', [
-        'seo' => $seo,
-        'content' => $content,
-        'useReact' => $useReact
-    ]);
-}
-    public function home()
-{
-    return $this->renderApp([
-        'title' => 'Diamantado de Rines en CDMX | JEAX',
-        'description' => 'Recupera el brillo original de tus rines con diamantado profesional.'
-    ], '
-        
-    ');
-}
-    public function categorias()
+    private function renderApp(array $seo = [], $content = '', $useReact = true)
     {
-        return $this->renderApp([
-            'title'       => 'Servicios de Reparación de Rines | JEAX Store',
-            'description' => 'Conoce todos nuestros servicios: enderezado, pintura automotriz, diamantado, pulido, barrenado y más.',
+        $seo = array_merge([
+
+            'title' => 'JEAX Store | Reparación de Rines en CDMX y Ecatepec',
+
+            'description' =>
+                'Especialistas en reparación de rines en CDMX y Ecatepec. Enderezado, diamantado, pintura y restauración profesional.',
+
+            'url' => url()->current(),
+
+            'faq' => null
+
+        ], $seo);
+
+        return view('welcome', [
+            'seo' => $seo,
+            'content' => $content,
+            'useReact' => $useReact
         ]);
     }
 
-    public function categoria($slug)
-    {
-        $categoria = Categoria::where('slug', $slug)->firstOrFail();
+    /*
+    |--------------------------------------------------------------------------
+    | HOME
+    |--------------------------------------------------------------------------
+    */
 
-        $content = "
-        <main>
+    public function home()
+    {
+        $faq = [
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => [
+
+                [
+                    "@type" => "Question",
+                    "name" => "¿Cuánto cuesta reparar un rin?",
+                    "acceptedAnswer" => [
+                        "@type" => "Answer",
+                        "text" => "El costo depende del daño y del tipo de rin. En JEAX realizamos diagnóstico profesional y cotización personalizada."
+                    ]
+                ],
+
+                [
+                    "@type" => "Question",
+                    "name" => "¿Cuánto tarda la reparación?",
+                    "acceptedAnswer" => [
+                        "@type" => "Answer",
+                        "text" => "La mayoría de los servicios se realizan el mismo día dependiendo del daño."
+                    ]
+                ],
+
+                [
+                    "@type" => "Question",
+                    "name" => "¿Reparan rines doblados?",
+                    "acceptedAnswer" => [
+                        "@type" => "Answer",
+                        "text" => "Sí, realizamos enderezado profesional de rines utilizando maquinaria especializada."
+                    ]
+                ]
+            ]
+        ];
+
+        $content = '
+
+<section class="seo-hidden">
+
+<h1>
+Reparación de Rines en CDMX, Aragón, Neza y Ecatepec
+</h1>
+
+<p>
+Especialistas en diamantado, enderezado y restauración profesional.
+</p>
+
+</section>
+
+';
+
+        return $this->renderApp([
+            'title' =>
+                'Reparación de Rines en CDMX (Aragón Neza y Ecatepec) | JEAX Store',
+
+            'description' =>
+                'Especialistas en reparación de rines en CDMX (Aragón Neza y Ecatepec). Enderezado, diamantado, soldadura y restauración profesional.',
+
+            'faq' => $faq
+
+        ], $content, true);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | REPARACIÓN DE RINES CDMX
+    |--------------------------------------------------------------------------
+    */
+
+    public function reparacionRinesCdmx()
+    {
+        $content = '
+
         <article>
 
-            <h1>{$categoria->nombre} en CDMX</h1>
+            <h1>
+                Reparación de Rines en CDMX
+            </h1>
 
             <section>
-            <h2>Servicio profesional de {$categoria->nombre}</h2>
-            <p>{$categoria->descripcion}</p>
-            <p>
-                En JEAX contamos con experiencia en {$categoria->nombre} en Ciudad de México,
-                ofreciendo soluciones profesionales para recuperar el estado óptimo de tus rines.
-            </p>
+
+                <p>
+                    En JEAX realizamos reparación profesional de rines
+                    dañados, doblados y rayados en Ciudad de México.
+                </p>
+
+                <img
+                    src="/img/reparacion-rines.webp"
+                    alt="Reparación de rines en CDMX"
+                    loading="lazy"
+                    width="1200"
+                    height="700"
+                >
+
             </section>
 
             <section>
-            <h2>¿Por qué elegirnos?</h2>
-            <ul>
-                <li>Equipo especializado</li>
-                <li>Atención rápida</li>
-                <li>Resultados garantizados</li>
-            </ul>
+
+                <h2>
+                    Problemas más comunes
+                </h2>
+
+                <ul>
+                    <li>Rines doblados por baches</li>
+                    <li>Rayones y desgaste</li>
+                    <li>Fisuras y golpes</li>
+                    <li>Pérdida de estabilidad</li>
+                </ul>
+
             </section>
 
             <section>
-            <h2>Servicios relacionados</h2>
-            <p>
-                <a href='/enderezado-rines'>Enderezado de rines</a> |
-                <a href='/diamantado-rines-cdmx'>Diamantado de rines</a>
-            </p>
+
+                <h2>
+                    Proceso profesional
+                </h2>
+
+                <p>
+                    Analizamos el daño estructural del rin y aplicamos
+                    técnicas especializadas de restauración.
+                </p>
+
+            </section>
+
+            <section>
+
+                <h2>
+                    Beneficios
+                </h2>
+
+                <ul>
+                    <li>Mayor seguridad</li>
+                    <li>Mejor apariencia</li>
+                    <li>Ahorro frente a reemplazo</li>
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h2>
+                    Agenda tu servicio
+                </h2>
+
+                <a href="https://wa.me/525548488280">
+                    Solicitar cotización
+                </a>
+
             </section>
 
         </article>
-        </main>
-        ";
+        ';
 
         return $this->renderApp([
-            'title' => "{$categoria->nombre} en CDMX | JEAX",
-            'description' => $categoria->descripcion
-        ], $content);
+
+            'title' =>
+                'Reparación de Rines en CDMX | Servicio Profesional JEAX',
+
+            'description' =>
+                'Servicio profesional de reparación de rines en CDMX. Restauración, enderezado, diamantado y pintura premium.',
+
+        ], $content, false);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ENDEREZADO
+    |--------------------------------------------------------------------------
+    */
+
+    public function enderezado()
+    {
+        $content = '
+
+        <article>
+
+            <h1>
+                Enderezado de Rines en CDMX
+            </h1>
+
+            <section>
+
+                <p>
+                    Corregimos deformaciones y golpes ocasionados por baches
+                    utilizando maquinaria especializada.
+                </p>
+
+                <img
+                    src="/img/enderezado-rines.webp"
+                    alt="Enderezado de rines en CDMX"
+                    loading="lazy"
+                    width="1200"
+                    height="700"
+                >
+
+            </section>
+
+            <section>
+
+                <h2>
+                    Síntomas de un rin doblado
+                </h2>
+
+                <ul>
+                    <li>Vibración al manejar</li>
+                    <li>Desgaste irregular</li>
+                    <li>Pérdida de estabilidad</li>
+                </ul>
+
+            </section>
+
+            <section>
+
+                <h2>
+                    Atención inmediata
+                </h2>
+
+                <a href="https://wa.me/525548488280">
+                    Cotizar servicio
+                </a>
+
+            </section>
+
+        </article>
+        ';
+
+        return $this->renderApp([
+
+            'title' =>
+                'Enderezado de Rines en CDMX y Ecatepec | JEAX',
+
+            'description' =>
+                'Especialistas en enderezado de rines doblados en CDMX y Ecatepec. Atención rápida y profesional.'
+
+        ], $content, false);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | DIAMANTADO
+    |--------------------------------------------------------------------------
+    */
+
+    public function diamantado()
+    {
+        $content = '
+
+        <article>
+
+            <h1>
+                Diamantado de Rines en CDMX
+            </h1>
+
+            <section>
+
+                <p>
+                    Recupera el acabado original de tus rines con
+                    diamantado profesional de alta precisión.
+                </p>
+
+                <img
+                    src="/img/diamantado-rines.webp"
+                    alt="Diamantado de rines en CDMX"
+                    loading="lazy"
+                    width="1200"
+                    height="700"
+                >
+
+            </section>
+
+            <section>
+
+                <h2>
+                    Beneficios del diamantado
+                </h2>
+
+                <ul>
+                    <li>Acabado premium</li>
+                    <li>Recupera brillo original</li>
+                    <li>Mejora estética del vehículo</li>
+                </ul>
+
+            </section>
+
+            <section>
+
+                <a href="https://wa.me/525548488280">
+                    Solicitar diamantado
+                </a>
+
+            </section>
+
+        </article>
+        ';
+
+        return $this->renderApp([
+
+            'title' =>
+                'Diamantado de Rines en CDMX | Restauración Premium JEAX',
+
+            'description' =>
+                'Servicio profesional de diamantado de rines en CDMX. Restauración estética premium para rines deportivos.'
+
+        ], $content, false);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CATEGORÍAS
+    |--------------------------------------------------------------------------
+    */
+
+    public function categorias()
+    {
+        return $this->renderApp([
+
+            'title' =>
+                'Servicios de Reparación de Rines | JEAX Store',
+
+            'description' =>
+                'Conoce nuestros servicios de reparación, diamantado, pintura, restauración y enderezado de rines.'
+
+        ], '', true);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | BLOG
+    |--------------------------------------------------------------------------
+    */
 
     public function blog()
     {
         return $this->renderApp([
-            'title'       => 'Blog de Rines y Autos | JEAX Store',
-            'description' => 'Consejos, noticias y guías sobre reparación y cuidado de rines.',
-        ]);
+
+            'title' =>
+                'Blog Automotriz y Reparación de Rines | JEAX',
+
+            'description' =>
+                'Consejos y guías sobre reparación de rines, mantenimiento automotriz y restauración premium.'
+
+        ], '', true);
     }
 
-    public function sitemap()
-{
-    $categorias = Categoria::all();
-    $posts = Post::all();
+    /*
+    |--------------------------------------------------------------------------
+    | POSTS
+    |--------------------------------------------------------------------------
+    */
 
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-
-    // 🏠 HOME
-    $xml .= '<url>';
-    $xml .= '<loc>' . url('/') . '</loc>';
-    $xml .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-    $xml .= '<priority>1.0</priority>';
-    $xml .= '<changefreq>weekly</changefreq>';
-    $xml .= '</url>';
-
-    // 🔥 PÁGINAS SEO (VENTA / POSICIONAMIENTO)
-    $paginasSeo = [
-        '/diamantado-rines-cdmx',
-        '/reparacion-rines-aluminio',
-        '/enderezado-rines',
-
-        // 🔥 SEO LOCAL (MUY IMPORTANTES)
-        '/enderezado-rines-ecatepec',
-        '/diamantado-rines-ecatepec',
-        '/reparacion-rines-cerca-de-mi',
-        '/diamantado-rines-cerca-de-mi',
-        '/enderezado-rines-cdmx',
-    ];
-
-    foreach ($paginasSeo as $page) {
-        $xml .= '<url>';
-        $xml .= '<loc>' . url($page) . '</loc>';
-        $xml .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-        $xml .= '<priority>0.9</priority>';
-        $xml .= '<changefreq>weekly</changefreq>';
-        $xml .= '</url>';
-    }
-
-    // 🧾 PÁGINAS INSTITUCIONALES (FOOTER)
-    $paginasFooter = [
-        '/nosotros',
-        '/contacto',
-        '/preguntas',
-        '/terminos',
-    ];
-
-    foreach ($paginasFooter as $page) {
-        $xml .= '<url>';
-        $xml .= '<loc>' . url($page) . '</loc>';
-        $xml .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-        $xml .= '<priority>0.4</priority>';
-        $xml .= '<changefreq>monthly</changefreq>';
-        $xml .= '</url>';
-    }
-
-    // 📂 CATEGORÍAS
-    foreach ($categorias as $cat) {
-        $xml .= '<url>';
-        $xml .= '<loc>' . url('/categorias/' . $cat->slug) . '</loc>';
-        $xml .= '<lastmod>' . now()->toAtomString() . '</lastmod>';
-        $xml .= '<priority>0.7</priority>';
-        $xml .= '<changefreq>weekly</changefreq>';
-        $xml .= '</url>';
-    }
-
-    // 📝 POSTS (BLOG)
-    foreach ($posts as $post) {
-        $xml .= '<url>';
-        $xml .= '<loc>' . url('/blog/post/' . $post->slug) . '</loc>';
-        $xml .= '<lastmod>' . $post->updated_at->toAtomString() . '</lastmod>';
-        $xml .= '<priority>0.6</priority>';
-        $xml .= '<changefreq>monthly</changefreq>';
-        $xml .= '</url>';
-    }
-
-    $xml .= '</urlset>';
-
-    return response($xml, 200)
-        ->header('Content-Type', 'application/xml');
-}
-
-public function contacto()
-{
-    $content = '
-    <main>
-      <article>
-
-        <h1>Contacto y ubicación | JEAX</h1>
-
-        <section>
-          <h2>¿Dónde estamos?</h2>
-          <p>
-            Nos encontramos en Ciudad de México, brindando servicio en zonas como
-            Ecatepec, Venustiano Carranza y alrededores.
-          </p>
-        </section>
-
-        <section>
-          <h2>Dirección</h2>
-          <p>Av Oceanía 291, Ciudad de México</p>
-        </section>
-
-        <section>
-          <h2>Teléfono</h2>
-          <p>55 48 48 82 80</p>
-        </section>
-
-        <section>
-          <h2>Contacto rápido</h2>
-          <p>
-            <a href="https://wa.me/525548488280">Enviar mensaje por WhatsApp</a>
-          </p>
-        </section>
-
-      </article>
-    </main>
-    ';
-
-    return $this->renderApp([
-        'title' => 'Contacto JEAX | Reparación de Rines en CDMX',
-        'description' => 'Ubicación, teléfono y contacto de JEAX. Servicio de reparación de rines en CDMX y zona metropolitana.'
-    ], $content, false);
-}
-
-public function preguntas()
-{
-    $content = '
-    <main>
-      <article>
-
-        <h1>Preguntas frecuentes sobre reparación de rines</h1>
-
-        <section>
-          <h2>¿Cuánto cuesta reparar un rin?</h2>
-          <p>
-            El costo depende del daño, tipo de rin y servicio requerido.
-            Contáctanos para una cotización personalizada.
-          </p>
-        </section>
-
-        <section>
-          <h2>¿Cuánto tarda el servicio?</h2>
-          <p>
-            La mayoría de los servicios se realizan el mismo día o en pocas horas,
-            dependiendo del daño.
-          </p>
-        </section>
-
-        <section>
-          <h2>¿Es seguro reparar un rin?</h2>
-          <p>
-            Sí, siempre que se realice con equipo profesional y técnicos especializados,
-            como en JEAX.
-          </p>
-        </section>
-
-        <section>
-          <h2>Servicios relacionados</h2>
-          <p>
-            <a href="/enderezado-rines">Enderezado</a> |
-            <a href="/diamantado-rines-cdmx">Diamantado</a>
-          </p>
-        </section>
-
-      </article>
-    </main>
-    ';
-
-    return $this->renderApp([
-        'title' => 'Preguntas Frecuentes | Reparación de Rines JEAX',
-        'description' => 'Resuelve tus dudas sobre reparación de rines: costos, tiempos y seguridad del servicio.'
-    ], $content, false);
-}
-
-public function terminos()
-{
-    $content = '
-    <main>
-      <article>
-
-        <h1>Condiciones de servicio</h1>
-
-        <section>
-          <h2>Alcance del servicio</h2>
-          <p>
-            JEAX ofrece servicios de reparación de rines bajo diagnóstico previo.
-            Los resultados dependen del estado del rin.
-          </p>
-        </section>
-
-        <section>
-          <h2>Responsabilidad</h2>
-          <p>
-            No nos hacemos responsables por daños previos no detectados durante la inspección inicial.
-          </p>
-        </section>
-
-        <section>
-          <h2>Garantía</h2>
-          <p>
-            Ofrecemos garantía en servicios realizados bajo condiciones normales de uso.
-          </p>
-        </section>
-
-      </article>
-    </main>
-    ';
-
-    return $this->renderApp([
-        'title' => 'Condiciones de Servicio | JEAX',
-        'description' => 'Consulta las condiciones y términos del servicio de reparación de rines en JEAX.'
-    ], $content, false);
-}
-
-public function nosotros()
-{
-    $content = '
-    <main>
-      <article>
-
-        <h1>Sobre JEAX - Especialistas en reparación de rines</h1>
-
-        <section>
-          <h2>¿Quiénes somos?</h2>
-          <p>
-            En JEAX somos especialistas en reparación de rines en Ciudad de México.
-            Contamos con experiencia en enderezado, diamantado, pintura y restauración
-            de rines de aluminio y acero.
-          </p>
-        </section>
-
-        <section>
-          <h2>Nuestra misión</h2>
-          <p>
-            Brindar soluciones profesionales que mejoren la seguridad y estética de tu vehículo,
-            utilizando tecnología especializada y procesos de alta precisión.
-          </p>
-        </section>
-
-        <section>
-          <h2>Servicios principales</h2>
-          <ul>
-            <li><a href="/enderezado-rines">Enderezado de rines</a></li>
-            <li><a href="/diamantado-rines-cdmx">Diamantado de rines</a></li>
-            <li><a href="/categorias">Reparación integral de rines</a></li>
-          </ul>
-        </section>
-
-      </article>
-    </main>
-    ';
-
-    return $this->renderApp([
-        'title' => 'Sobre JEAX | Reparación de Rines en CDMX',
-        'description' => 'Conoce JEAX, especialistas en reparación de rines en CDMX. Experiencia, tecnología y servicio profesional.'
-    ], $content, false);
-}
-
-public function diamantado()
-{
-    $content = '
-        <h2>¿Qué es el diamantado de rines?</h2>
-        <p>El diamantado de rines es un proceso de precisión que restaura el acabado original del rin mediante corte controlado en torno CNC. Este procedimiento elimina rayones, desgaste y daños superficiales, devolviendo el brillo metálico característico.</p>
-
-        <h2>¿Cuándo necesitas diamantado?</h2>
-        <ul>
-            <li>Rines rayados o con desgaste</li>
-            <li>Pérdida de brillo original</li>
-            <li>Daños por baches o banquetas</li>
-            <li>Rines opacos o deteriorados</li>
-        </ul>
-
-        <h2>Proceso profesional en JEAX</h2>
-        <p>En JEAX realizamos un proceso completo:</p>
-        <ul>
-            <li>Inspección del rin</li>
-            <li>Corrección de imperfecciones</li>
-            <li>Maquinado diamantado</li>
-            <li>Protección con sellado especializado</li>
-        </ul>
-
-        <h2>Ventajas del diamantado</h2>
-        <ul>
-            <li>Recupera apariencia original</li>
-            <li>Mejora estética del vehículo</li>
-            <li>Aumenta valor del auto</li>
-            <li>Acabado profesional de alta precisión</li>
-        </ul>
-
-        <h2>Servicios relacionados</h2>
-        <p>
-            <a href="https://www.jeax.store/categorias">Reparación de rines</a> |
-            <a href="https://www.jeax.store/enderezado-rines">Enderezado de rines</a>
-        </p>
-
-        <h2>¿Dónde estamos?</h2>
-        <p>Estamos ubicados en Ciudad de México y atendemos zonas como Ecatepec, Venustiano Carranza y alrededores.</p>
-
-        <h2>Contáctanos</h2>
-        <p>
-            📍 Av Oceanía 291, CDMX<br>
-            📞 55 48 48 82 80<br>
-            💬 Atención por WhatsApp
-        </p>
-    ';
-
-    return $this->renderApp([
-        'title' => 'Diamantado de Rines en CDMX | Reparación Profesional | JEAX',
-        'description' => 'Servicio de diamantado de rines en CDMX. Recupera el acabado original de tus rines con tecnología profesional. Atención rápida y garantizada.'
-    ], $content, false);
-}
     public function post($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
 
         return $this->renderApp([
-            'title'       => ($post->titulo ?? $slug) . ' | JEAX Store Blog',
-            'description' => $post->extracto ?? $post->descripcion ?? '',
-        ]);
+
+            'title' =>
+                ($post->titulo ?? $slug) . ' | JEAX Blog',
+
+            'description' =>
+                $post->extracto ?? $post->descripcion ?? ''
+
+        ], '', true);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | PÁGINAS
+    |--------------------------------------------------------------------------
+    */
 
     public function pagina($slug)
     {
         $pagina = Pagina::where('slug', $slug)->firstOrFail();
 
         return $this->renderApp([
-            'title'       => ($pagina->titulo ?? $slug) . ' | JEAX Store',
-            'description' => $pagina->descripcion ?? '',
-        ]);
+
+            'title' =>
+                ($pagina->titulo ?? $slug) . ' | JEAX Store',
+
+            'description' =>
+                $pagina->descripcion ?? ''
+
+        ], '', true);
     }
-    public function enderezado()
+
+    /*
+    |--------------------------------------------------------------------------
+    | SITEMAP
+    |--------------------------------------------------------------------------
+    */
+
+    public function sitemap()
     {
-        $content = '
-        <main>
-        <article>
+        $categorias = Categoria::all();
+        $posts = Post::all();
 
-            <h1>Enderezado de rines en CDMX</h1>
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
 
-            <section>
-            <h2>¿Qué es el enderezado de rines?</h2>
-            <p>
-                El enderezado de rines es un proceso especializado que permite corregir deformaciones
-                causadas por baches, golpes o desgaste. En Ciudad de México, donde las vialidades
-                pueden dañar fácilmente los rines, este servicio es fundamental para mantener la
-                seguridad del vehículo.
-            </p>
-            </section>
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-            <section>
-            <h2>Señales de que necesitas enderezar tus rines</h2>
-            <ul>
-                <li>Vibración al conducir</li>
-                <li>Desgaste irregular en llantas</li>
-                <li>Golpes visibles en el rin</li>
-                <li>Pérdida de estabilidad</li>
-            </ul>
-            </section>
+        $urls = [
 
-            <section>
-            <h2>Proceso profesional en JEAX</h2>
-            <p>Realizamos un proceso completo:</p>
-            <ul>
-                <li>Diagnóstico estructural del rin</li>
-                <li>Enderezado con maquinaria hidráulica</li>
-                <li>Balanceo y verificación</li>
-                <li>Pruebas de seguridad</li>
-            </ul>
-            </section>
+            '/',
+            '/reparacion-de-rines-cdmx',
+            '/enderezado-rines',
+            '/diamantado-rines-cdmx',
+            '/reparacion-rines-ecatepec',
+            '/reparacion-rines-cerca-de-mi'
 
-            <section>
-            <h2>Beneficios del enderezado de rines</h2>
-            <ul>
-                <li>Mayor seguridad al conducir</li>
-                <li>Mejor desempeño del vehículo</li>
-                <li>Ahorro en reemplazo de rines</li>
-            </ul>
-            </section>
+        ];
 
-            <section>
-            <h2>Servicio en CDMX y zona metropolitana</h2>
-            <p>
-                Atendemos Ciudad de México, Ecatepec, Nezahualcóyotl y zonas cercanas.
-            </p>
-            </section>
+        foreach ($urls as $url) {
 
-            <section>
-            <h2>Servicios relacionados</h2>
-            <p>
-                <a href="/diamantado-rines-cdmx">Diamantado de rines</a> |
-                <a href="/categorias">Reparación de rines</a>
-            </p>
-            </section>
+            $xml .= '<url>';
 
-            <div style="margin-top:30px;">
-            <a href="https://wa.me/525548488280"
-                style="background:#C9A84C; color:#000; padding:12px 20px; border-radius:8px;">
-                Cotizar por WhatsApp
-            </a>
-            </div>
+            $xml .= '<loc>' . url($url) . '</loc>';
 
-        </article>
-        </main>
-        ';
+            $xml .= '<changefreq>weekly</changefreq>';
 
-        return $this->renderApp([
-            'title' => 'Enderezado de Rines en CDMX | JEAX',
-            'description' => 'Servicio profesional de enderezado de rines en CDMX. Corrige golpes, vibraciones y deformaciones con especialistas.'
-        ], $content, false);
+            $xml .= '<priority>1.0</priority>';
+
+            $xml .= '</url>';
+        }
+
+        foreach ($categorias as $cat) {
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>' .
+                url('/categorias/' . $cat->slug) .
+                '</loc>';
+
+            $xml .= '<changefreq>weekly</changefreq>';
+
+            $xml .= '<priority>0.8</priority>';
+
+            $xml .= '</url>';
+        }
+
+        foreach ($posts as $post) {
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>' .
+                url('/blog/post/' . $post->slug) .
+                '</loc>';
+
+            $xml .= '<changefreq>monthly</changefreq>';
+
+            $xml .= '<priority>0.6</priority>';
+
+            $xml .= '</url>';
+        }
+
+        $xml .= '</urlset>';
+
+        return response($xml, 200)
+            ->header('Content-Type', 'application/xml');
     }
 
-   public function app()
-{
-    return $this->renderApp([], '', true);
-}
+    /*
+    |--------------------------------------------------------------------------
+    | APP REACT
+    |--------------------------------------------------------------------------
+    */
+
+    public function app()
+    {
+        return $this->renderApp([], '', true);
+    }
 }

@@ -229,7 +229,7 @@ const Home = () => {
                       <p className="mb-1 small">{empresa.descripcion}</p>
                       <p className="mb-1 small">
                         Horario de la tienda
-                        de 10 a. m. a 7 p. m. todos los días.
+                        de 10 a. m. a 7 p. m. de lunes a Sábado .
                       </p>
 
                       <div className="d-flex gap-2 mt-2">
