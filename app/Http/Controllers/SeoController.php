@@ -208,6 +208,95 @@ Especialistas en diamantado, enderezado y restauración profesional.
     }
 
     /*
+|--------------------------------------------------------------------------
+| NOSOTROS
+|--------------------------------------------------------------------------
+*/
+
+public function nosotros()
+{
+    $content = '
+
+    <article>
+
+        <h1>
+            Nosotros | JEAX Store
+        </h1>
+
+        <section>
+
+            <p>
+                En JEAX Store somos especialistas en reparación,
+                diamantado y restauración profesional de rines
+                en CDMX y Ecatepec.
+            </p>
+
+        </section>
+
+    </article>
+
+    ';
+
+    return $this->renderApp([
+
+        'title' =>
+            'Nosotros | JEAX Store',
+
+        'description' =>
+            'Conoce más sobre JEAX Store y nuestros servicios profesionales de reparación de rines.'
+
+    ], $content, false);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CONTACTO
+|--------------------------------------------------------------------------
+*/
+
+public function contacto()
+{
+    $content = '
+
+    <article>
+
+        <h1>
+            Contacto | JEAX Store
+        </h1>
+
+        <section>
+
+            <p>
+                Contáctanos para reparación, diamantado,
+                pintura y restauración de rines en CDMX
+                y Ecatepec.
+            </p>
+
+            <p>
+                WhatsApp:
+                <a href="https://wa.me/525548488280">
+                    55 4848 8280
+                </a>
+            </p>
+
+        </section>
+
+    </article>
+
+    ';
+
+    return $this->renderApp([
+
+        'title' =>
+            'Contacto | JEAX Store',
+
+        'description' =>
+            'Contáctanos para reparación profesional de rines en CDMX y Ecatepec.'
+
+    ], $content, false);
+}
+    /*
     |--------------------------------------------------------------------------
     | ENDEREZADO
     |--------------------------------------------------------------------------
@@ -285,7 +374,81 @@ Especialistas en diamantado, enderezado y restauración profesional.
     | DIAMANTADO
     |--------------------------------------------------------------------------
     */
+    /*
+|--------------------------------------------------------------------------
+| PREGUNTAS FRECUENTES
+|--------------------------------------------------------------------------
+*/
 
+public function preguntas()
+{
+    $content = '
+
+    <article>
+
+        <h1>
+            Preguntas Frecuentes
+        </h1>
+
+        <section>
+
+            <h2>
+                ¿Cuánto tarda la reparación?
+            </h2>
+
+            <p>
+                Dependiendo del daño, muchos servicios se entregan
+                el mismo día.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>
+                ¿Reparan rines doblados?
+            </h2>
+
+            <p>
+                Sí, realizamos enderezado profesional de rines.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>
+                ¿Trabajan rines deportivos?
+            </h2>
+
+            <p>
+                Sí, trabajamos rines deportivos, de lujo y OEM.
+            </p>
+
+        </section>
+
+        <section>
+
+            <a href="https://wa.me/525548488280">
+                Solicitar información
+            </a>
+
+        </section>
+
+    </article>
+
+    ';
+
+    return $this->renderApp([
+
+        'title' =>
+            'Preguntas Frecuentes | JEAX Store',
+
+        'description' =>
+            'Resolvemos tus dudas sobre reparación, diamantado y restauración de rines en CDMX y Ecatepec.'
+
+    ], $content, false);
+}
     public function diamantado()
     {
         $content = '
@@ -354,6 +517,88 @@ Especialistas en diamantado, enderezado y restauración profesional.
     | CATEGORÍAS
     |--------------------------------------------------------------------------
     */
+
+    /*
+|--------------------------------------------------------------------------
+| TÉRMINOS Y CONDICIONES
+|--------------------------------------------------------------------------
+*/
+
+public function terminos()
+{
+    $content = '
+
+    <article>
+
+        <h1>
+            Términos y Condiciones
+        </h1>
+
+        <section>
+
+            <p>
+                Al utilizar los servicios de JEAX Store,
+                el cliente acepta los presentes términos
+                y condiciones.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>
+                Servicios
+            </h2>
+
+            <p>
+                Los tiempos de entrega y costos pueden variar
+                dependiendo del estado del rin y del servicio solicitado.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>
+                Garantía
+            </h2>
+
+            <p>
+                La garantía aplica únicamente sobre defectos
+                derivados del servicio realizado.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>
+                Contacto
+            </h2>
+
+            <p>
+                WhatsApp:
+                <a href="https://wa.me/525548488280">
+                    55 4848 8280
+                </a>
+            </p>
+
+        </section>
+
+    </article>
+
+    ';
+
+    return $this->renderApp([
+
+        'title' =>
+            'Términos y Condiciones | JEAX Store',
+
+        'description' =>
+            'Consulta los términos y condiciones de los servicios de reparación y restauración de rines de JEAX Store.'
+
+    ], $content, false);
+}
 
     public function categorias()
     {
